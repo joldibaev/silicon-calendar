@@ -1,1 +1,5 @@
-<div class="ngx-calendar-date">{{ date | date:pipeFormat }}</div>
+<div class="ngx-calendar-date">
+  @if (!hideDate) {
+    {{ date | date:pipeFormat }}
+  }
+</div>

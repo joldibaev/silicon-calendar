@@ -15,6 +15,7 @@ export class NgxCalendarDateComponent {
   private options = inject(OptionsService).options;
 
   @Input({required: true}) date: Date = new Date();
+  @Input() hideDate = false;
 
   @Input() @HostBinding('class.disabled') disabled = false;
   @Input() @HostBinding('class.active') active = false;

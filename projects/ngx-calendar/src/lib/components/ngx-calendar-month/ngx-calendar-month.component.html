@@ -1,5 +1,6 @@
 @for (date of prevMonthDates; track date) {
-  <ngx-calendar-date [noInteract]="noInteractPrevMonth" [disabled]="true" [date]="date"></ngx-calendar-date>
+  <ngx-calendar-date [hideDate]="!showAnotherMonths" [noInteract]="noInteractPrevMonth" [disabled]="true"
+                     [date]="date"></ngx-calendar-date>
 }
 
 @for (date of dates; track date) {
@@ -7,5 +8,6 @@
 }
 
 @for (date of nextMonthDates; track date) {
-  <ngx-calendar-date [noInteract]="noInteractPrevMonth" [disabled]="true" [date]="date"></ngx-calendar-date>
+  <ngx-calendar-date [hideDate]="!showAnotherMonths" [noInteract]="noInteractPrevMonth" [disabled]="true"
+                     [date]="date"></ngx-calendar-date>
 }

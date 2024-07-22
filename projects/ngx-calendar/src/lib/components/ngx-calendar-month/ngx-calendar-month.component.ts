@@ -19,7 +19,7 @@ import {OptionsService} from "../../services/options.service";
 })
 export class NgxCalendarMonthComponent implements OnChanges {
   private calendarService = inject(CalendarService);
-  private optionsService = inject(OptionsService);
+  private options = inject(OptionsService).options;
 
   @Input({required: true}) month: Month = 0;
 
@@ -32,7 +32,7 @@ export class NgxCalendarMonthComponent implements OnChanges {
   nextMonthDates?: Date[];
   dates?: Date[];
 
-  noInteractPrevMonth = !this.optionsService.options.allowClickDisableDate;
+  noInteractPrevMonth = !this.options.allowClickDisableDate;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['month']) {
@@ -48,8 +48,12 @@ export class NgxCalendarMonthComponent implements OnChanges {
     return this.calendarService.getCleanDate(this.year, this.month + 1, 0);
   }
 
-  private get startDay(): number {
-    return Number(this.optionsService.options.startFromMonday);
+  get startDay(): number {
+    return Number(this.options.startFromMonday);
+  }
+
+  get showAnotherMonths() {
+    return this.options.showAnotherMonths;
   }
 
   setMonth(month: number) {
