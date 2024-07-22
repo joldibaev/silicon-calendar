@@ -5,3 +5,7 @@
 @for (date of dates; track date) {
   <ngx-calendar-date [active]="date | isEqual: today" [date]="date"></ngx-calendar-date>
 }
+
+@for (date of nextMonthDates; track date) {
+  <ngx-calendar-date [noInteract]="noInteractPrevMonth" [disabled]="true" [date]="date"></ngx-calendar-date>
+}

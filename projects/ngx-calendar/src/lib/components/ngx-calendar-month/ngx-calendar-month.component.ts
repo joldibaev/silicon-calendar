@@ -28,32 +28,38 @@ export class NgxCalendarMonthComponent implements OnChanges {
   year = new Date().getFullYear();
   today = this.calendarService.getCleanTodayDate();
 
-  firstDate?: Date;
-  lastDate?: Date;
-
   prevMonthDates?: Date[];
+  nextMonthDates?: Date[];
   dates?: Date[];
 
   noInteractPrevMonth = !this.optionsService.options.allowClickDisableDate;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['month']) {
-      const date = new Date();
-      date.setMonth(this.month);
-
-      // ** prev
-      this.prevMonthDates = this.preparePrevMonth();
-
-      this.firstDate = this.calendarService.getCleanDate(this.year, this.month, 1);
-      this.lastDate = this.calendarService.getCleanDate(this.year, this.month + 1, 0);
-
-      this.dates = Array.from({length: this.lastDate.getDate()}, (_, i) => new Date(this.year, this.month, i + 1));
+      this.setMonth(this.month);
     }
   }
 
-  private preparePrevMonth() {
+  get firstDate() {
+    return this.calendarService.getCleanDate(this.year, this.month, 1);
+  }
+
+  get lastDate() {
+    return this.calendarService.getCleanDate(this.year, this.month + 1, 0);
+  }
+
+  setMonth(month: number) {
+    const date = new Date();
+    date.setMonth(month);
+
+    this.prevMonthDates = this.getRestPrevMonthDates();
+    this.nextMonthDates = this.getRestNextMonthDates();
+    this.dates = this.getCurrentMonthDates();
+  }
+
+  private getRestPrevMonthDates() {
     // get the first day of the month
-    const dayOne = new Date(this.year, this.month, 1).getDay();
+    const dayOne = this.firstDate.getDay();
 
     // get the last date of the previous month
     const prevMonthLastDate = new Date(this.year, this.month, 0).getDate();
@@ -68,5 +74,25 @@ export class NgxCalendarMonthComponent implements OnChanges {
     }
 
     return prevMonthDates;
+  }
+
+  private getCurrentMonthDates() {
+    return Array.from({length: this.lastDate.getDate()}, (_, i) => new Date(this.year, this.month, i + 1))
+  }
+
+  private getRestNextMonthDates() {
+    // get the day of the last date of the month
+    const dayEnd = new Date(this.year, this.month, this.lastDate.getDate()).getDay();
+
+    // loop to add the last dates of the previous month
+    const nextMonthDates: Date[] = [];
+
+    for (let i = dayEnd; i < 6; i++) {
+      const date = i - dayEnd + 1;
+      const cleanDate = this.calendarService.getCleanDate(this.year, this.month - 1, date);
+      nextMonthDates.push(cleanDate);
+    }
+
+    return nextMonthDates;
   }
 }
