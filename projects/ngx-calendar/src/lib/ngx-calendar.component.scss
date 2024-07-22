@@ -1,9 +1,13 @@
 .ngx-calendar {
+  --ngx-calendar-primary: #1e90ff;
+
   // date color
   --ngx-calendar-date-disabled-color: #aaa;
+  --ngx-calendar-date-active-color: #fff;
   --ngx-calendar-date-color: #222;
 
   // date bg
+  --ngx-calendar-date-active-bg: var(--ngx-calendar-primary);
   --ngx-calendar-date-hover-bg: #eee;
   --ngx-calendar-date-bg: transparent;
 

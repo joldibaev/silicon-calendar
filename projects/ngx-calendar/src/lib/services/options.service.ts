@@ -3,7 +3,8 @@ import {NgxCalendarOptions} from "../types/options.interface";
 
 @Injectable()
 export class OptionsService {
-  options: Partial<NgxCalendarOptions> = {
-    datePipeFormat: 'dd'
+  options: NgxCalendarOptions = {
+    datePipeFormat: 'dd',
+    allowClickDisableDate: true
   };
 }

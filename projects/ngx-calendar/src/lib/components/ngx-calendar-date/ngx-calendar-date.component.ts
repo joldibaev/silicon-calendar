@@ -12,11 +12,14 @@ import {OptionsService} from "../../services/options.service";
   ],
 })
 export class NgxCalendarDateComponent {
+  private options = inject(OptionsService).options;
+
   @Input({required: true}) date: Date = new Date();
 
   @Input() @HostBinding('class.disabled') disabled = false;
+  @Input() @HostBinding('class.active') active = false;
 
-  private options = inject(OptionsService).options;
+  @Input() @HostBinding('class.no-interact') noInteract = false;
 
   get pipeFormat() {
     return this.options.datePipeFormat;

@@ -3,6 +3,8 @@ import {CalendarService} from "../../services/calendar.service";
 import {Month} from "../../types/month.type";
 import {DatePipe} from "@angular/common";
 import {NgxCalendarDateComponent} from "../ngx-calendar-date/ngx-calendar-date.component";
+import {IsEqualPipe} from "../../pipes/is-equal.pipe";
+import {OptionsService} from "../../services/options.service";
 
 @Component({
   selector: 'ngx-calendar-month',
@@ -11,24 +13,28 @@ import {NgxCalendarDateComponent} from "../ngx-calendar-date/ngx-calendar-date.c
   standalone: true,
   imports: [
     DatePipe,
-    NgxCalendarDateComponent
+    IsEqualPipe,
+    NgxCalendarDateComponent,
   ],
 })
 export class NgxCalendarMonthComponent implements OnChanges {
   private calendarService = inject(CalendarService);
+  private optionsService = inject(OptionsService);
 
   @Input({required: true}) month: Month = 0;
 
   @Input() allowClickPrevMonthDates = false;
 
   year = new Date().getFullYear();
-
+  today = this.calendarService.getCleanTodayDate();
 
   firstDate?: Date;
   lastDate?: Date;
 
   prevMonthDates?: Date[];
   dates?: Date[];
+
+  noInteractPrevMonth = !this.optionsService.options.allowClickDisableDate;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['month']) {

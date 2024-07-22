@@ -11,7 +11,7 @@ import {NgxCalendarOptions} from "../../projects/ngx-calendar/src/lib/types/opti
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  options: NgxCalendarOptions = {
-    datePipeFormat: 'dd'
+  options: Partial<NgxCalendarOptions> = {
+    datePipeFormat: 'dd',
   };
 }

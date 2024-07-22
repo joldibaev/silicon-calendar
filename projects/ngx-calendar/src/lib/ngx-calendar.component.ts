@@ -21,10 +21,12 @@ export class NgxCalendar implements OnInit {
 
   ngOnInit() {
     if (this.options) {
-      Object.entries(this.options).forEach(([_key, value]) => {
-        const key = _key as keyof NgxCalendarOptions;
-        this.optionsService.options[key] = value;
-      })
+      this.optionsService.options = {
+        ...this.optionsService.options,
+        ...this.options
+      }
     }
   }
+
+
 }

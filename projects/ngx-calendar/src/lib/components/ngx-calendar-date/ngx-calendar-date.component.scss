@@ -2,11 +2,21 @@
   width: calc(100% / 7);
 
   padding: .25rem;
-  cursor: pointer;
 
-  &:hover {
+  &:not(.no-interact) {
+    cursor: pointer;
+
+    &:hover {
+      > .ngx-calendar-date {
+        background-color: var(--ngx-calendar-date-hover-bg);
+      }
+    }
+  }
+
+  &.active {
     > .ngx-calendar-date {
-      background-color: var(--ngx-calendar-date-hover-bg);
+      color: var(--ngx-calendar-date-active-color);
+      background-color: var(--ngx-calendar-primary);
     }
   }
 
