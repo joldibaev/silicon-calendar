@@ -1,4 +1,3 @@
-type Range<N extends number, Result extends number[] = []> =
-  Result['length'] extends N ? Result[number] : Range<N, [...Result, Result['length']]>;
+import {Range} from './range.type';
 
 export type Month = Range<12>;

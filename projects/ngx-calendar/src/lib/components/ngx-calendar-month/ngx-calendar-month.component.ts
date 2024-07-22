@@ -48,6 +48,10 @@ export class NgxCalendarMonthComponent implements OnChanges {
     return this.calendarService.getCleanDate(this.year, this.month + 1, 0);
   }
 
+  private get startDay(): number {
+    return Number(this.optionsService.options.startFromMonday);
+  }
+
   setMonth(month: number) {
     const date = new Date();
     date.setMonth(month);
@@ -59,7 +63,7 @@ export class NgxCalendarMonthComponent implements OnChanges {
 
   private getRestPrevMonthDates() {
     // get the first day of the month
-    const dayOne = this.firstDate.getDay();
+    const dayOne = this.firstDate.getDay() - this.startDay;
 
     // get the last date of the previous month
     const prevMonthLastDate = new Date(this.year, this.month, 0).getDate();
@@ -82,7 +86,7 @@ export class NgxCalendarMonthComponent implements OnChanges {
 
   private getRestNextMonthDates() {
     // get the day of the last date of the month
-    const dayEnd = new Date(this.year, this.month, this.lastDate.getDate()).getDay();
+    const dayEnd = new Date(this.year, this.month, this.lastDate.getDate()).getDay() - this.startDay;
 
     // loop to add the last dates of the previous month
     const nextMonthDates: Date[] = [];

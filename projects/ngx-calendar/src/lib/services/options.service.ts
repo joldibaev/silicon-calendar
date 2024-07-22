@@ -5,6 +5,7 @@ import {NgxCalendarOptions} from "../types/options.interface";
 export class OptionsService {
   options: NgxCalendarOptions = {
     datePipeFormat: 'dd',
-    allowClickDisableDate: true
+    allowClickDisableDate: true,
+    startFromMonday: true,
   };
 }
