@@ -1,0 +1,31 @@
+:host {
+  width: calc(100% / 7);
+
+  padding: .25rem;
+  cursor: pointer;
+
+  &:hover {
+    > .ngx-calendar-date {
+      background-color: var(--ngx-calendar-date-hover-bg);
+    }
+  }
+
+  &.disabled {
+    > .ngx-calendar-date {
+      color: var(--ngx-calendar-date-disabled-color);
+    }
+  }
+}
+
+.ngx-calendar-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--ngx-calendar-date-color);
+  background-color: var(--ngx-calendar-date-bg);
+
+  aspect-ratio: 1/1;
+
+  border-radius: 50%;
+}

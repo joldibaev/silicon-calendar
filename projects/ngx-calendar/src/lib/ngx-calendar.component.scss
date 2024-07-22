@@ -1,0 +1,14 @@
+.ngx-calendar {
+  // date color
+  --ngx-calendar-date-disabled-color: #aaa;
+  --ngx-calendar-date-color: #222;
+
+  // date bg
+  --ngx-calendar-date-hover-bg: #eee;
+  --ngx-calendar-date-bg: transparent;
+
+  font-family: sans-serif;
+
+  width: 320px;
+  margin: 0 auto;
+}
