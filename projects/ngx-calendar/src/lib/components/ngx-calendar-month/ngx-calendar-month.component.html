@@ -1,13 +1,24 @@
 @for (date of prevMonthDates; track date) {
-  <ngx-calendar-date [hideDate]="!showAnotherMonths" [noInteract]="noInteractPrevMonth" [disabled]="true"
-                     [date]="date"></ngx-calendar-date>
+  <ngx-calendar-date [hideDate]="!showAnotherMonths"
+                     [noInteract]="noInteractPrevMonth"
+                     [disabled]="true"
+                     [date]="date"
+                     (click)="dateClicked(date)"
+  ></ngx-calendar-date>
 }
 
 @for (date of dates; track date) {
-  <ngx-calendar-date [active]="date | isEqual: today" [date]="date"></ngx-calendar-date>
+  <ngx-calendar-date [active]="date | isEqual: today"
+                     [date]="date"
+                     (click)="dateClicked(date)"
+  ></ngx-calendar-date>
 }
 
 @for (date of nextMonthDates; track date) {
-  <ngx-calendar-date [hideDate]="!showAnotherMonths" [noInteract]="noInteractPrevMonth" [disabled]="true"
-                     [date]="date"></ngx-calendar-date>
+  <ngx-calendar-date [hideDate]="!showAnotherMonths"
+                     [noInteract]="noInteractPrevMonth"
+                     [disabled]="true"
+                     [date]="date"
+                     (click)="dateClicked(date)"
+  ></ngx-calendar-date>
 }

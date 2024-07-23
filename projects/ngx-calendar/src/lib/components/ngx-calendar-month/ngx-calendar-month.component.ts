@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Month} from "../../types/month.type";
 import {DatePipe} from "@angular/common";
 import {NgxCalendarDateComponent} from "../ngx-calendar-date/ngx-calendar-date.component";
@@ -23,6 +23,8 @@ export class NgxCalendarMonthComponent implements OnChanges {
   @Input({required: true}) month: Month = 0;
 
   @Input() allowClickPrevMonthDates = false;
+
+  @Output() selected = new EventEmitter<DateEx>();
 
   year = new DateEx().getFullYear();
   today = new DateEx();
@@ -101,5 +103,9 @@ export class NgxCalendarMonthComponent implements OnChanges {
     }
 
     return nextMonthDates;
+  }
+
+  dateClicked(date: DateEx) {
+    this.selected.emit(date);
   }
 }
