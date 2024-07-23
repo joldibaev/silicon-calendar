@@ -3,6 +3,8 @@
 
   padding: .25rem;
 
+  user-select: none;
+
   &:not(.no-interact) {
     cursor: pointer;
 
