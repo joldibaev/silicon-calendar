@@ -1,10 +1,9 @@
 import {Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {Month} from "../../types/month.type";
 import {DatePipe} from "@angular/common";
 import {NgxCalendarDateComponent} from "../ngx-calendar-date/ngx-calendar-date.component";
 import {IsEqualPipe} from "../../pipes/is-equal.pipe";
 import {OptionsService} from "../../services/options.service";
-import {DateEx} from "../../types/date.class";
+import {DateEx} from "../../types/date-ex";
 
 @Component({
   selector: 'ngx-calendar-month',
@@ -20,14 +19,14 @@ import {DateEx} from "../../types/date.class";
 export class NgxCalendarMonthComponent implements OnChanges {
   private options = inject(OptionsService).options;
 
-  @Input({required: true}) month: Month = 0;
+  @Input({required: true}) month!: number;
+  @Input({required: true}) year!: number;
 
   @Input() allowClickPrevMonthDates = false;
 
   @Output() selected = new EventEmitter<DateEx>();
 
-  year = new DateEx().getFullYear();
-  today = new DateEx();
+  protected today = new DateEx();
 
   prevMonthDates?: DateEx[];
   nextMonthDates?: DateEx[];
@@ -36,8 +35,8 @@ export class NgxCalendarMonthComponent implements OnChanges {
   noInteractPrevMonth = !this.options.allowClickDisableDate;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['month']) {
-      this.setMonth(this.month);
+    if (changes['month'] || changes['year']) {
+      this.setPresented();
     }
   }
 
@@ -57,10 +56,7 @@ export class NgxCalendarMonthComponent implements OnChanges {
     return this.options.showAnotherMonths;
   }
 
-  setMonth(month: number) {
-    const date = new DateEx();
-    date.setMonth(month);
-
+  setPresented() {
     this.prevMonthDates = this.getRestPrevMonthDates();
     this.nextMonthDates = this.getRestNextMonthDates();
     this.dates = this.getCurrentMonthDates();

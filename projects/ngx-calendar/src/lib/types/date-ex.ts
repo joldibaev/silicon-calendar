@@ -1,5 +1,10 @@
+export interface Presented {
+  year: number;
+  month: number;
+}
+
 export class DateEx extends Date {
-  isEqual(date2: DateEx): boolean {
+  isEqual(date2: Date): boolean {
     return (
       this.getFullYear() === date2.getFullYear() &&
       this.getMonth() === date2.getMonth() &&
@@ -13,6 +18,13 @@ export class DateEx extends Date {
 
   isBefore(date2: DateEx): boolean {
     return this.getTime() < date2.getTime();
+  }
+
+  toPresented() {
+    return {
+      year: this.getFullYear(),
+      month: this.getMonth(),
+    }
   }
 
   override toString() {

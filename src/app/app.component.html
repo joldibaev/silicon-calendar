@@ -1,3 +1,19 @@
-<div>
-  <ngx-calendar [options]="options" (selected)="selected($event)"></ngx-calendar>
-</div>
+<main>
+  <h1>Silicon Calendar</h1>
+
+  <section>
+    <h2>Show today</h2>
+
+    <ngx-calendar #ngxCalendar (selected)="selected($event)" [options]="options"></ngx-calendar>
+
+    <div>{{ [ngxCalendar.month, ngxCalendar.year].join(', ') }}</div>
+
+    <div class="flex mb-3">
+      <button (click)="ngxCalendar.toPrevMonth()">prev month</button>
+<!--      <button (click)="ngxCalendar.navigateTo()">current month</button>-->
+      <button (click)="ngxCalendar.toNextMonth()">next month</button>
+    </div>
+
+    <button>Select today</button>
+  </section>
+</main>

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {NgxCalendar} from "../../projects/ngx-calendar/src/lib/ngx-calendar.component";
 import {NgxCalendarOptions} from "../../projects/ngx-calendar/src/lib/types/options.interface";
-import {DateEx} from "../../projects/ngx-calendar/src/lib/types/date.class";
+import {DateEx} from "../../projects/ngx-calendar/src/lib/types/date-ex";
 
 @Component({
   selector: 'app-root',

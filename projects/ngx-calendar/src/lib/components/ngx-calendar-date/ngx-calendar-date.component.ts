@@ -1,7 +1,7 @@
 import {Component, HostBinding, inject, Input} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {OptionsService} from "../../services/options.service";
-import {DateEx} from "../../types/date.class";
+import {DateEx} from "../../types/date-ex";
 
 @Component({
   selector: 'ngx-calendar-date',

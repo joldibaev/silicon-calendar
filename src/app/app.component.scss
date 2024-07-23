@@ -1,0 +1,25 @@
+main {
+  max-width: 768px;
+  margin: 0 auto;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+h1, h2 {
+  margin-top: 0;
+}
+
+section {
+  padding: 1rem;
+  border: 1px solid #eee;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
