@@ -3,4 +3,5 @@ export interface NgxCalendarOptions {
   allowClickDisableDate: boolean;
   startFromMonday: boolean;
   showAnotherMonths: boolean;
+  checkToday: boolean;
 }

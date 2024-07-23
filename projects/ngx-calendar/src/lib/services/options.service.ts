@@ -7,6 +7,7 @@ export class OptionsService {
     datePipeFormat: 'dd',
     allowClickDisableDate: true,
     startFromMonday: true,
-    showAnotherMonths: true
+    showAnotherMonths: true,
+    checkToday: true
   };
 }

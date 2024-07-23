@@ -19,9 +19,12 @@ export class NgxCalendarDateComponent {
   @Input() hideDate = false;
 
   @Input() @HostBinding('class.disabled') disabled = false;
-  @Input() @HostBinding('class.active') active = false;
+  // @Input() @HostBinding('class.active') active = false;
+  @Input() @HostBinding('class.today') today = false;
 
   @Input() @HostBinding('class.no-interact') noInteract = false;
+
+  @HostBinding('class.check-today') checkToday = this.options.checkToday;
 
   get pipeFormat() {
     return this.options.datePipeFormat;

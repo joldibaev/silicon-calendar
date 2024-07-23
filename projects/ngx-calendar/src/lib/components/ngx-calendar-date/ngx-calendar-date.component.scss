@@ -15,6 +15,12 @@
     }
   }
 
+  &.today.check-today {
+    > .ngx-calendar-date {
+      color: var(--ngx-calendar-primary);
+    }
+  }
+
   &.active {
     > .ngx-calendar-date {
       color: var(--ngx-calendar-date-active-color);

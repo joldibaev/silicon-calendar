@@ -8,7 +8,7 @@
 }
 
 @for (date of dates; track date) {
-  <ngx-calendar-date [active]="date | isEqual: today"
+  <ngx-calendar-date [today]="date | isEqual: today"
                      [date]="date"
                      (click)="dateClicked(date)"
   ></ngx-calendar-date>
