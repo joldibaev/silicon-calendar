@@ -92,10 +92,13 @@ export class NgxCalendarMonthComponent implements OnChanges {
     // loop to add the last dates of the previous month
     const nextMonthDates: DateEx[] = [];
 
-    for (let i = dayEnd; i < 6; i++) {
-      const date = i - dayEnd + 1;
-      const cleanDate = new DateEx(this.year, this.month - 1, date);
-      nextMonthDates.push(cleanDate);
+    if (dayEnd >= 0) {
+      for (let i = dayEnd; i < 6; i++) {
+        // console.log(i)
+        const date = i - dayEnd + 1;
+        const cleanDate = new DateEx(this.year, this.month - 1, date);
+        nextMonthDates.push(cleanDate);
+      }
     }
 
     return nextMonthDates;

@@ -6,7 +6,7 @@ export class OptionsService {
   options: NgxCalendarOptions = {
     datePipeFormat: 'dd',
     allowClickDisableDate: true,
-    startFromMonday: true,
+    startFromMonday: false,
     showAnotherMonths: {
       previousMonth: true,
       nextMonth: true,
