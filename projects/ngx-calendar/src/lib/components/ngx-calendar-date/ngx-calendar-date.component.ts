@@ -1,6 +1,7 @@
 import {Component, HostBinding, inject, Input} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {OptionsService} from "../../services/options.service";
+import {DateEx} from "../../types/date.class";
 
 @Component({
   selector: 'ngx-calendar-date',
@@ -8,13 +9,13 @@ import {OptionsService} from "../../services/options.service";
   styleUrl: './ngx-calendar-date.component.scss',
   standalone: true,
   imports: [
-    DatePipe
+    DatePipe,
   ],
 })
 export class NgxCalendarDateComponent {
   private options = inject(OptionsService).options;
 
-  @Input({required: true}) date: Date = new Date();
+  @Input({required: true}) date = new DateEx();
   @Input() hideDate = false;
 
   @Input() @HostBinding('class.disabled') disabled = false;

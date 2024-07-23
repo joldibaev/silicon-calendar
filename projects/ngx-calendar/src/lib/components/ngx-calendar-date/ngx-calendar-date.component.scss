@@ -6,7 +6,7 @@
   &:not(.no-interact) {
     cursor: pointer;
 
-    &:hover {
+    &:not(.active):hover {
       > .ngx-calendar-date {
         background-color: var(--ngx-calendar-date-hover-bg);
       }

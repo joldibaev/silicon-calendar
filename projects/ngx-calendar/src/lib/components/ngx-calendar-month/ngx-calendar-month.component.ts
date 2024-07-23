@@ -1,10 +1,10 @@
 import {Component, inject, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {CalendarService} from "../../services/calendar.service";
 import {Month} from "../../types/month.type";
 import {DatePipe} from "@angular/common";
 import {NgxCalendarDateComponent} from "../ngx-calendar-date/ngx-calendar-date.component";
 import {IsEqualPipe} from "../../pipes/is-equal.pipe";
 import {OptionsService} from "../../services/options.service";
+import {DateEx} from "../../types/date.class";
 
 @Component({
   selector: 'ngx-calendar-month',
@@ -18,19 +18,18 @@ import {OptionsService} from "../../services/options.service";
   ],
 })
 export class NgxCalendarMonthComponent implements OnChanges {
-  private calendarService = inject(CalendarService);
   private options = inject(OptionsService).options;
 
   @Input({required: true}) month: Month = 0;
 
   @Input() allowClickPrevMonthDates = false;
 
-  year = new Date().getFullYear();
-  today = this.calendarService.getCleanTodayDate();
+  year = new DateEx().getFullYear();
+  today = new DateEx();
 
-  prevMonthDates?: Date[];
-  nextMonthDates?: Date[];
-  dates?: Date[];
+  prevMonthDates?: DateEx[];
+  nextMonthDates?: DateEx[];
+  dates?: DateEx[];
 
   noInteractPrevMonth = !this.options.allowClickDisableDate;
 
@@ -41,11 +40,11 @@ export class NgxCalendarMonthComponent implements OnChanges {
   }
 
   get firstDate() {
-    return this.calendarService.getCleanDate(this.year, this.month, 1);
+    return new DateEx(this.year, this.month, 1);
   }
 
   get lastDate() {
-    return this.calendarService.getCleanDate(this.year, this.month + 1, 0);
+    return new DateEx(this.year, this.month + 1, 0);
   }
 
   get startDay(): number {
@@ -57,7 +56,7 @@ export class NgxCalendarMonthComponent implements OnChanges {
   }
 
   setMonth(month: number) {
-    const date = new Date();
+    const date = new DateEx();
     date.setMonth(month);
 
     this.prevMonthDates = this.getRestPrevMonthDates();
@@ -65,19 +64,19 @@ export class NgxCalendarMonthComponent implements OnChanges {
     this.dates = this.getCurrentMonthDates();
   }
 
-  private getRestPrevMonthDates() {
+  private getRestPrevMonthDates(): DateEx[] {
     // get the first day of the month
     const dayOne = this.firstDate.getDay() - this.startDay;
 
     // get the last date of the previous month
-    const prevMonthLastDate = new Date(this.year, this.month, 0).getDate();
+    const prevMonthLastDate = new DateEx(this.year, this.month, 0).getDate();
 
     // loop to add the last dates of the previous month
-    const prevMonthDates: Date[] = [];
+    const prevMonthDates: DateEx[] = [];
 
     for (let i = dayOne; i > 0; i--) {
       const date = prevMonthLastDate - i + 1;
-      const cleanDate = this.calendarService.getCleanDate(this.year, this.month - 1, date);
+      const cleanDate = new DateEx(this.year, this.month - 1, date);
       prevMonthDates.push(cleanDate);
     }
 
@@ -85,19 +84,19 @@ export class NgxCalendarMonthComponent implements OnChanges {
   }
 
   private getCurrentMonthDates() {
-    return Array.from({length: this.lastDate.getDate()}, (_, i) => new Date(this.year, this.month, i + 1))
+    return Array.from({length: this.lastDate.getDate()}, (_, i) => new DateEx(this.year, this.month, i + 1))
   }
 
-  private getRestNextMonthDates() {
+  private getRestNextMonthDates(): DateEx[] {
     // get the day of the last date of the month
-    const dayEnd = new Date(this.year, this.month, this.lastDate.getDate()).getDay() - this.startDay;
+    const dayEnd = new DateEx(this.year, this.month, this.lastDate.getDate()).getDay() - this.startDay;
 
     // loop to add the last dates of the previous month
-    const nextMonthDates: Date[] = [];
+    const nextMonthDates: DateEx[] = [];
 
     for (let i = dayEnd; i < 6; i++) {
       const date = i - dayEnd + 1;
-      const cleanDate = this.calendarService.getCleanDate(this.year, this.month - 1, date);
+      const cleanDate = new DateEx(this.year, this.month - 1, date);
       nextMonthDates.push(cleanDate);
     }
 

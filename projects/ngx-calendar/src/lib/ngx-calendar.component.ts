@@ -1,5 +1,4 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {CalendarService} from "./services/calendar.service";
 import {NgxCalendarMonthComponent} from "./components/ngx-calendar-month/ngx-calendar-month.component";
 import {NgxCalendarOptions} from "./types/options.interface";
 import {OptionsService} from "./services/options.service";
@@ -12,7 +11,7 @@ import {OptionsService} from "./services/options.service";
   imports: [
     NgxCalendarMonthComponent
   ],
-  providers: [CalendarService, OptionsService]
+  providers: [OptionsService]
 })
 export class NgxCalendar implements OnInit {
   private optionsService = inject(OptionsService);
