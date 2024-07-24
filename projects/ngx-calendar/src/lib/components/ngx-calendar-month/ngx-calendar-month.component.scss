@@ -1,6 +1,14 @@
-:host {
-  width: 100%;
+.ngx-calendar-weeks {
+  margin-bottom: .5rem;
+}
 
+.ngx-calendar-weeks,
+.ngx-calendar-dates {
   display: flex;
   flex-wrap: wrap;
+
+  > * {
+    width: calc(100% / 7);
+    text-align: center;
+  }
 }

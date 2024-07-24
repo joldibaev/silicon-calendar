@@ -1,4 +1,4 @@
-import {Component, HostBinding, inject, Input} from '@angular/core';
+import {Component, HostBinding, inject, Input, OnInit} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {OptionsService} from "../../services/options.service";
 import {DateEx} from "../../types/date-ex";
@@ -12,19 +12,23 @@ import {DateEx} from "../../types/date-ex";
     DatePipe,
   ],
 })
-export class NgxCalendarDateComponent {
+export class NgxCalendarDateComponent implements OnInit {
   private options = inject(OptionsService).options;
 
-  @Input({required: true}) date = new DateEx();
+  @Input({required: true}) date!: DateEx;
   @Input() hideDate = false;
 
   @Input() @HostBinding('class.disabled') disabled = false;
-  // @Input() @HostBinding('class.active') active = false;
-  @Input() @HostBinding('class.today') today = false;
+  @Input() @HostBinding('class.active') active = false;
 
   @Input() @HostBinding('class.no-interact') noInteract = false;
 
-  @HostBinding('class.check-today') checkToday = this.options.checkToday;
+  @HostBinding('class.today') today = false;
+  @HostBinding('class.check-today') checkToday = this.options.markToday;
+
+  ngOnInit() {
+    this.today = this.date.isEqual(new DateEx())
+  }
 
   get pipeFormat() {
     return this.options.datePipeFormat;

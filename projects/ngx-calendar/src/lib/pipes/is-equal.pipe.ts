@@ -6,7 +6,8 @@ import {DateEx} from "../types/date-ex";
   standalone: true
 })
 export class IsEqualPipe implements PipeTransform {
-  transform(date1: DateEx, date2: Date): boolean {
+  transform(date1?: DateEx, date2?: Date): boolean {
+    if (!date1 || !date2) return false;
     return date1.isEqual(date2);
   }
 }

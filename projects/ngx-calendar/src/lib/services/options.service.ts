@@ -1,16 +1,17 @@
 import {Injectable} from '@angular/core';
-import {NgxCalendarOptions} from "../types/options.interface";
+import {NgxCalendarOptions} from "../types/options";
 
 @Injectable()
 export class OptionsService {
   options: NgxCalendarOptions = {
     datePipeFormat: 'dd',
-    allowClickDisableDate: true,
-    startFromMonday: false,
-    showAnotherMonths: {
+    interactWithAnotherMonthsDates: false,
+    showAnotherMonthsDates: {
       previousMonth: true,
       nextMonth: true,
     },
-    checkToday: true
+    showWeeks: true,
+    startFromMonday: false,
+    markToday: true
   };
 }

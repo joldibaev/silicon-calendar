@@ -10,33 +10,32 @@ import {DateEx} from "../../types/date-ex";
   templateUrl: './ngx-calendar-month.component.html',
   styleUrl: './ngx-calendar-month.component.scss',
   standalone: true,
-  imports: [
-    DatePipe,
-    IsEqualPipe,
-    NgxCalendarDateComponent,
-  ],
+  imports: [DatePipe, IsEqualPipe, NgxCalendarDateComponent,],
 })
 export class NgxCalendarMonthComponent implements OnChanges {
-  private options = inject(OptionsService).options;
+  protected options = inject(OptionsService).options;
 
   @Input({required: true}) month!: number;
   @Input({required: true}) year!: number;
 
   @Input() allowClickPrevMonthDates = false;
 
-  @Output() selected = new EventEmitter<DateEx>();
+  @Input() selectedDate?: DateEx;
+  @Output() selectedDateChange = new EventEmitter<DateEx>();
 
-  protected today = new DateEx();
+  protected weeks: DateEx[] = [];
 
-  prevMonthDates?: DateEx[];
-  nextMonthDates?: DateEx[];
-  dates?: DateEx[];
-
-  noInteractPrevMonth = !this.options.allowClickDisableDate;
+  protected prevMonthDates: DateEx[] = [];
+  protected nextMonthDates: DateEx[] = [];
+  protected dates: DateEx[] = [];
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['month'] || changes['year']) {
-      this.setPresented();
+      this.updateDates();
+
+      if (this.options.showWeeks) {
+        this.updateWeeks();
+      }
     }
   }
 
@@ -52,14 +51,16 @@ export class NgxCalendarMonthComponent implements OnChanges {
     return Number(this.options.startFromMonday);
   }
 
-  get showAnotherMonths() {
-    return this.options.showAnotherMonths;
-  }
-
-  setPresented() {
+  updateDates() {
     this.prevMonthDates = this.getRestPrevMonthDates();
     this.nextMonthDates = this.getRestNextMonthDates();
     this.dates = this.getCurrentMonthDates();
+  }
+
+  updateWeeks() {
+    const totalDays = [...this.prevMonthDates, ...this.dates, ...this.nextMonthDates];
+
+    this.weeks = totalDays.slice(0, 7)
   }
 
   private getRestPrevMonthDates(): DateEx[] {
@@ -105,6 +106,6 @@ export class NgxCalendarMonthComponent implements OnChanges {
   }
 
   dateClicked(date: DateEx) {
-    this.selected.emit(date);
+    this.selectedDateChange.emit(date);
   }
 }

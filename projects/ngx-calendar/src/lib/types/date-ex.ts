@@ -1,8 +1,3 @@
-export interface Presented {
-  year: number;
-  month: number;
-}
-
 export class DateEx extends Date {
   isEqual(date2: Date): boolean {
     return (

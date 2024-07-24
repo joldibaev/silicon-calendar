@@ -1,5 +1,7 @@
 <div class="ngx-calendar">
-  <ngx-calendar-month (selected)="dateSelected($event)"
-                      [month]="presented.month"
-                      [year]="presented.year"></ngx-calendar-month>
+  <ngx-calendar-month
+    (selectedDateChange)="selectedDateChange($event)"
+    [(selectedDate)]="date"
+    [month]="presented.month"
+    [year]="presented.year"></ngx-calendar-month>
 </div>

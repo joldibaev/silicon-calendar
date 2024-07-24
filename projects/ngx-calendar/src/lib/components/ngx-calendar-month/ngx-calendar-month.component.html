@@ -1,24 +1,34 @@
-@for (date of prevMonthDates; track date) {
-  <ngx-calendar-date [hideDate]="!showAnotherMonths.previousMonth"
-                     [noInteract]="noInteractPrevMonth"
-                     [disabled]="true"
-                     [date]="date"
-                     (click)="dateClicked(date)"
-  ></ngx-calendar-date>
+@if (weeks.length) {
+  <section class="ngx-calendar-weeks">
+    @for (week of weeks; track week) {
+      <div>{{ week | date:'EE' }}</div>
+    }
+  </section>
 }
 
-@for (date of dates; track date) {
-  <ngx-calendar-date [today]="date | isEqual: today"
-                     [date]="date"
-                     (click)="dateClicked(date)"
-  ></ngx-calendar-date>
-}
+<section class="ngx-calendar-dates">
+  @for (date of prevMonthDates; track date) {
+    <ngx-calendar-date [hideDate]="!options.showAnotherMonthsDates"
+                       [noInteract]="!options.interactWithAnotherMonthsDates"
+                       [disabled]="true"
+                       [date]="date"
+                       (click)="dateClicked(date)"
+    ></ngx-calendar-date>
+  }
 
-@for (date of nextMonthDates; track date) {
-  <ngx-calendar-date [hideDate]="!showAnotherMonths.nextMonth"
-                     [noInteract]="noInteractPrevMonth"
-                     [disabled]="true"
-                     [date]="date"
-                     (click)="dateClicked(date)"
-  ></ngx-calendar-date>
-}
+  @for (date of dates; track date) {
+    <ngx-calendar-date [date]="date"
+                       (click)="dateClicked(date)"
+                       [active]="selectedDate | isEqual: date"
+    ></ngx-calendar-date>
+  }
+
+  @for (date of nextMonthDates; track date) {
+    <ngx-calendar-date [hideDate]="!options.showAnotherMonthsDates"
+                       [noInteract]="!options.interactWithAnotherMonthsDates"
+                       [disabled]="true"
+                       [date]="date"
+                       (click)="dateClicked(date)"
+    ></ngx-calendar-date>
+  }
+</section>
